@@ -8,7 +8,7 @@ def download_dropbox_file(url, output_path):
         with open(output_path, "wb") as f:
             for chunk in r.iter_content(chunk_size=8192):
                 f.write(chunk)
-url = "https://www.dropbox.com/s/i29uivrageevar8/self_resnet50.h5?dl=0
+url = "https://www.dropbox.com/s/i29uivrageevar8/self_resnet50.h5?dl=0"
 
 import os
 os.system("pip install tensorflow")
