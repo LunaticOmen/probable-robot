@@ -8,10 +8,7 @@ def download_dropbox_file(url, output_path):
         with open(output_path, "wb") as f:
             for chunk in r.iter_content(chunk_size=8192):
                 f.write(chunk)
-url = "https://www.dropbox.com/s/i29uivrageevar8/self_resnet50.h5?dl=0"
-output_path = "self_resnet50.h5"
-download_dropbox_file(url, output_path)
-model_path = "self_resnet50.h5"
+url = "https://www.dropbox.com/s/i29uivrageevar8/self_resnet50.h5?dl=0
 
 import os
 os.system("pip install tensorflow")
@@ -23,8 +20,14 @@ import numpy as np
 from tensorflow.keras.utils import img_to_array
 
 from keras.models import load_model
-# Load the saved model
-model = load_model(model_path)
+response = requests.get(url)
+response.raise_for_status()
+
+# Load model using TensorFlow
+with io.BytesIO(response.content) as buffer:
+    buffer.seek(0)
+    model = tf.keras.models.load_model(buffer)
+    
 # Define the function to make a prediction
 def make_prediction(image):
     # Preprocess the image
