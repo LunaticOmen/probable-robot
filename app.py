@@ -1,3 +1,11 @@
+import requests
+url = "https://www.dropbox.com/s/i29uivrageevar8/self_resnet50.h5?dl=0"
+response = requests.get(url)
+open("self_resnet50.h5.h5", "wb").write(response.content)
+from download_model import download_model
+
+model_path = "self_resnet50.h5"
+download_model(model_path)
 
 import os
 os.system("pip install tensorflow")
