@@ -15,7 +15,6 @@ from tensorflow.keras.utils import img_to_array
 
 from keras.models import load_model
 # Load the saved model
-model_path = "/home/kalyan/DataSets/animals/self_resnet50.h5"
 model = load_model(model_path)
 # Define the function to make a prediction
 def make_prediction(image):
