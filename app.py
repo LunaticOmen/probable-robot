@@ -1,7 +1,16 @@
+
+
 import requests
+
+def download_dropbox_file(url, output_path):
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(output_path, "wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
 url = "https://www.dropbox.com/s/i29uivrageevar8/self_resnet50.h5?dl=0"
-response = requests.get(url)
-open("self_resnet50.h5.h5", "wb").write(response.content)
+output_path = "self_resnet50.h5"
+download_dropbox_file(url, output_path)
 model_path = "self_resnet50.h5"
 
 import os
