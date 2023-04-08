@@ -1,4 +1,7 @@
-!pip install -r requirements.txt
+
+import os
+os.system("pip install tensorflow")
+os.system("pip install numpy")
 
 import streamlit as st
 from PIL import Image
