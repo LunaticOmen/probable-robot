@@ -1,28 +1,30 @@
+import os 
+os.system('pip install streamlit numpy Pillow tensorflow google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client')
 import streamlit as st
 import os
 from PIL import Image
 import numpy as np
 from tensorflow.keras.utils import img_to_array
-os.system('pip install gdown')
-import gdown
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
-# Install required packages if they are not already installed
-if not os.path.exists('streamlit'):
-    os.system('pip install streamlit')
-if not os.path.exists('numpy'):
-    os.system('pip install numpy')
-if not os.path.exists('Pillow'):
-    os.system('pip install Pillow')
-if not os.path.exists('tensorflow'):
-    os.system('pip install tensorflow')
-    
 from keras.models import load_model
 
 # Load the saved model
-url = 'https://drive.google.com/file/d/1QoJdVNtdR3vYJEoFMgtSJ1ZkfpvUjmor'
-output = '/tmp/model.h5'
-gdown.download(url, output, quiet=False)
-model = load_model(output)
+def download_file_from_google_drive(file_id, destination):
+    credentials = Credentials.from_authorized_user_info(info=None)
+    service = build('drive', 'v3', credentials=credentials)
+    request = service.files().get_media(fileId=file_id)
+    with open(destination, 'wb') as f:
+        f.write(request.execute())
+
+model_path = "self_resnet50.h5"
+if not os.path.exists(model_path):
+    file_id = "1QoJdVNtdR3vYJEoFMgtSJ1ZkfpvUjmor"
+    download_file_from_google_drive(file_id, model_path)
+
+model = load_model(model_path)
 
 # Define the function to make a prediction
 def make_prediction(image):
