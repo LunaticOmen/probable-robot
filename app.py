@@ -3,6 +3,7 @@ import os
 from PIL import Image
 import numpy as np
 from tensorflow.keras.utils import img_to_array
+os.system('pip install gdown')
 import gdown
 
 # Install required packages if they are not already installed
