@@ -10,6 +10,7 @@ from PIL import Image
 from keras.utils import img_to_array
 from google_drive_downloader import GoogleDriveDownloader as gdd
 
+
 # Define the function to download a file from Google Drive
 def download_file_from_google_drive(id, destination):
     gdd.download_file_from_google_drive(file_id=id, dest_path=destination)
