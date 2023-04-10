@@ -1,14 +1,19 @@
 
 import io
 import os
-os.system("pip install googledrivedownloader")
+import subprocess
+
+# Install the googledrivedownloader package
+subprocess.call(["pip", "install", "googledrivedownloader"])
+
+# Import the GoogleDriveDownloader class
+from google_drive_downloader import GoogleDriveDownloader as gdd
 import requests
 import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
 from keras.utils import img_to_array
-from google_drive_downloader import GoogleDriveDownloader as gdd
 
 
 # Define the function to download a file from Google Drive
